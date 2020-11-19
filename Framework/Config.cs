@@ -7,6 +7,6 @@ namespace TeleportPoint.Framework
     public class Config
     {
         public SButton OpenTeleport { get; set; } = SButton.L;
-        public List<TeleportData> TeleportDatas { get; set; } = new List<TeleportData>();
+        public List<TeleportData> TeleportData { get; set; } = new List<TeleportData>();
     }
 }

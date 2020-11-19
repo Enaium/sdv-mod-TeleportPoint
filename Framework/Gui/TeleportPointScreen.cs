@@ -9,11 +9,8 @@ namespace TeleportPoint.Framework.Gui
 {
     public class TeleportPointScreen : ScreenGui
     {
-        private Config _config;
-
         public TeleportPointScreen()
         {
-            _config = ModEntry.GetInstance().Helper.ReadConfig<Config>();
             AddElement(new Button(Get("teleportPoint.button.record"), Get("teleportPoint.button.record"))
             {
                 OnLeftClicked = () =>
@@ -21,22 +18,36 @@ namespace TeleportPoint.Framework.Gui
                     Game1.activeClickableMenu =
                         new NamingScreen(name =>
                             {
-                                _config.TeleportDatas.Add(new TeleportData(name, Game1.player.currentLocation.name,
+                                ModEntry.Config.TeleportData.Add(new TeleportData(name, Game1.player.currentLocation.name,
                                     Game1.player.getTileX(), Game1.player.getTileY()));
-                                ModEntry.GetInstance().Helper.WriteConfig(_config);
-                                Game1.activeClickableMenu = null;
+                                ModEntry.ConfigReload();
+                                Game1.exitActiveMenu();
                             },
                             Get("teleportPoint.title.naming"));
                 }
             });
-            
-            AddElement(new Label(Get("teleportPoint.label.teleportPointList"), Get("teleportPoint.label.teleportPointList")));
 
-            foreach (var variable in _config.TeleportDatas)
+            AddElement(new Label(Get("teleportPoint.label.teleportPointList"),
+                Get("teleportPoint.label.teleportPointList")));
+
+            foreach (var variable in ModEntry.Config.TeleportData)
             {
-                AddElement(new Button($"{Get("teleportPoint.button.teleportPoint")}{variable.Name}", $"{Get("teleportPoint.button.teleportPoint")}{variable.Name}")
+                AddElement(new Label($"{Get("teleportPoint.label.teleportPoint")}:{variable.Name}",
+                    $"{Get("teleportPoint.label.teleportPoint")}:{variable.Name}"));
+
+                AddElement(new Button($"{Get("teleportPoint.button.teleport")}",
+                    $"{Get("teleportPoint.button.teleport")}:{variable.Name}")
                 {
                     OnLeftClicked = () => { Teleport(variable.LocationName, variable.TileX, variable.TileY); }
+                });
+                AddElement(new Button($"{Get("teleportPoint.button.delete")}",
+                    $"{Get("teleportPoint.button.delete")}:{variable.Name}")
+                {
+                    OnLeftClicked = () =>
+                    {
+                        ModEntry.Config.TeleportData.Remove(variable);
+                        ModEntry.ConfigReload();
+                    }
                 });
             }
         }

@@ -8,7 +8,7 @@ namespace TeleportPoint
 {
     public class ModEntry : Mod
     {
-        private Config _config;
+        public static Config Config;
         private static ModEntry _instance;
 
         public ModEntry()
@@ -18,8 +18,14 @@ namespace TeleportPoint
 
         public override void Entry(IModHelper helper)
         {
-            _config = helper.ReadConfig<Config>();
+            Config = helper.ReadConfig<Config>();
             helper.Events.Input.ButtonPressed += OnButtonPress;
+        }
+        
+        public static void ConfigReload()
+        {
+            GetInstance().Helper.WriteConfig(Config);
+            GetInstance().Helper.ReadConfig<Config>();
         }
 
         private void OnButtonPress(object sender, ButtonPressedEventArgs e)
@@ -28,7 +34,7 @@ namespace TeleportPoint
                 return;
             if (!Context.IsPlayerFree)
                 return;
-            if (e.Button != _config.OpenTeleport)
+            if (e.Button != Config.OpenTeleport)
                 return;
             Game1.activeClickableMenu = new TeleportPointScreen();
         }

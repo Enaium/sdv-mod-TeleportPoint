@@ -1,6 +1,8 @@
 ﻿{
-  "teleportPoint.button.teleportPoint": "Teleport to ",
+  "teleportPoint.button.teleport": "Teleport",
   "teleportPoint.button.record": "Record teleport point",
+  "teleportPoint.button.delete": "Delete",
   "teleportPoint.title.naming": "Naming",
-  "teleportPoint.label.teleportPointList": "Teleport point list"
+  "teleportPoint.label.teleportPointList": "Teleport point list",
+  "teleportPoint.label.teleportPoint": "Teleport Point"
 }
