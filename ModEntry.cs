@@ -1,6 +1,7 @@
 ﻿using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.Menus;
 using TeleportPoint.Framework;
 using TeleportPoint.Framework.Gui;
 
@@ -39,8 +40,11 @@ namespace TeleportPoint
             Game1.activeClickableMenu = new TeleportPointScreen();
         }
         
+        public static string GetTranslation(string key)
+        {
+            return GetInstance().Helper.Translation.Get(key);
+        }
         
-
         public static ModEntry GetInstance()
         {
             return _instance;
