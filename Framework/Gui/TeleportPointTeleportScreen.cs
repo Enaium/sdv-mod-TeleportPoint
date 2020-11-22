@@ -4,9 +4,9 @@ using StardewValley;
 
 namespace TeleportPoint.Framework.Gui
 {
-    public class TeleportPointListScreen : ScreenGui
+    public class TeleportPointTeleportScreen : ScreenGui
     {
-        public TeleportPointListScreen()
+        public TeleportPointTeleportScreen()
         {
             AddElement(new Label(Get("teleportPoint.label.teleportPointList"),
                 Get("teleportPoint.label.teleportPointList")));

@@ -30,7 +30,7 @@ namespace TeleportPoint.Framework.Gui
             AddElement(new Button($"{ModEntry.GetTranslation("teleportPoint.button.teleport")}",
                 $"{ModEntry.GetTranslation("teleportPoint.button.teleport")}")
             {
-                OnLeftClicked = () => { Game1.activeClickableMenu = new TeleportPointListScreen(); }
+                OnLeftClicked = () => { Game1.activeClickableMenu = new TeleportPointTeleportScreen(); }
             });
             
             AddElement(new Button($"{ModEntry.GetTranslation("teleportPoint.button.delete")}",
