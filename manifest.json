@@ -1,7 +1,7 @@
 ﻿{
   "Name": "TeleportPoint",
   "Author": "Enaium",
-  "Version": "1.2.0",
+  "Version": "1.1.1",
   "Description": "Record teleport point",
   "UniqueID": "Enaium.TeleportPoint",
   "EntryDll": "TeleportPoint.dll",
