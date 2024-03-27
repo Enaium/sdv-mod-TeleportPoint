@@ -11,31 +11,22 @@ namespace TeleportPoint.Framework.Gui
     {
         public TeleportPointScreen()
         {
-            AddElement(new Button(ModEntry.GetTranslation("teleportPoint.button.record"),
-                ModEntry.GetTranslation("teleportPoint.button.record"))
+            AddElement(new Button(ModEntry.GetTranslation("teleportPoint.button.record.title"),
+                ModEntry.GetTranslation("teleportPoint.button.record.title"))
             {
                 OnLeftClicked = () =>
                 {
-                    Game1.activeClickableMenu =
-                        new NamingScreen(name =>
-                            {
-                                ModEntry.Config.TeleportData.Add(new TeleportData(name,
-                                    Game1.player.currentLocation.Name,
-                                    Game1.player.Tile.X, Game1.player.Tile.Y));
-                                ModEntry.ConfigReload();
-                                Game1.exitActiveMenu();
-                            },
-                            ModEntry.GetTranslation("teleportPoint.title.naming"));
+                    Game1.activeClickableMenu = new NamingScreen();
                 }
             });
-            AddElement(new Button($"{ModEntry.GetTranslation("teleportPoint.button.teleport")}",
-                $"{ModEntry.GetTranslation("teleportPoint.button.teleport")}")
+            AddElement(new Button($"{ModEntry.GetTranslation("teleportPoint.button.teleport.title")}",
+                $"{ModEntry.GetTranslation("teleportPoint.button.teleport.title")}")
             {
                 OnLeftClicked = () => { Game1.activeClickableMenu = new TeleportPointTeleportScreen(); }
             });
 
-            AddElement(new Button($"{ModEntry.GetTranslation("teleportPoint.button.delete")}",
-                $"{ModEntry.GetTranslation("teleportPoint.button.delete")}")
+            AddElement(new Button($"{ModEntry.GetTranslation("teleportPoint.button.delete.title")}",
+                $"{ModEntry.GetTranslation("teleportPoint.button.delete.title")}")
             {
                 OnLeftClicked = () => { Game1.activeClickableMenu = new TeleportPointDeleteScreen(); }
             });

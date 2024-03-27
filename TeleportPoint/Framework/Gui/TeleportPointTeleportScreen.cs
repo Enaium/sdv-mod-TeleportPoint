@@ -8,13 +8,13 @@ namespace TeleportPoint.Framework.Gui
     {
         public TeleportPointTeleportScreen()
         {
-            AddElement(new Label(Get("teleportPoint.label.teleportPointList"),
-                Get("teleportPoint.label.teleportPointList")));
+            AddElement(new Label(Get("teleportPoint.label.teleportPointList.title"),
+                Get("teleportPoint.label.teleportPointList.title")));
 
             foreach (var variable in ModEntry.Config.TeleportData)
             {
-                AddElement(new Button($"{Get("teleportPoint.button.teleport")}:{variable.Name}",
-                    $"{Get("teleportPoint.button.teleport")}:{variable.Name}")
+                AddElement(new Button($"{Get("teleportPoint.button.teleport.title")}:{variable.Name}",
+                    $"{Get("teleportPoint.button.teleport.title")}:{variable.Name}")
                 {
                     OnLeftClicked = () => { Teleport(variable.LocationName, variable.TileX, variable.TileY); }
                 });

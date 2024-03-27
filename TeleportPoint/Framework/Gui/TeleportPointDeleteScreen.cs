@@ -7,13 +7,13 @@ namespace TeleportPoint.Framework.Gui
     {
         public TeleportPointDeleteScreen()
         {
-            AddElement(new Label(ModEntry.GetTranslation("teleportPoint.label.teleportPointList"),
-                ModEntry.GetTranslation("teleportPoint.label.teleportPointList")));
+            AddElement(new Label(ModEntry.GetTranslation("teleportPoint.label.teleportPointList.title"),
+                ModEntry.GetTranslation("teleportPoint.label.teleportPointList.title")));
 
             foreach (var variable in ModEntry.Config.TeleportData)
             {
-                Button delete = new Button($"{ModEntry.GetTranslation("teleportPoint.button.delete")}:{variable.Name}",
-                    $"{ModEntry.GetTranslation("teleportPoint.button.delete")}:{variable.Name}");
+                Button delete = new Button($"{ModEntry.GetTranslation("teleportPoint.button.delete.title")}:{variable.Name}",
+                    $"{ModEntry.GetTranslation("teleportPoint.button.delete.title")}:{variable.Name}");
                 delete.OnLeftClicked = () =>
                 {
                     ModEntry.Config.TeleportData.Remove(variable);

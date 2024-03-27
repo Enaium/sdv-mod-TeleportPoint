@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using EnaiumToolKit.Framework.Screen;
+using EnaiumToolKit.Framework.Screen.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardewValley.BellsAndWhistles;
@@ -6,29 +8,34 @@ using StardewValley.Menus;
 
 namespace TeleportPoint.Framework.Gui
 {
-    public class NamingScreen : NamingMenu
+    public class NamingScreen : GuiScreen
     {
-        public string Title { get; set; }
-
-        public NamingScreen(doneNamingBehavior b, string title, string? defaultName = null) : base(b, title,
-            defaultName)
+        public NamingScreen()
         {
-            Title = title;
-            textBox.Width = 800;
-            textBox.X = (Game1.viewport.Width - textBox.Width) / 2;
-            doneNamingButton.bounds = new Rectangle(textBox.X + textBox.Width + 32, doneNamingButton.bounds.Y,
-                doneNamingButton.bounds.Width, doneNamingButton.bounds.Height);
-        }
-
-        public override void draw(SpriteBatch b)
-        {
-            base.draw(b);
-            b.Draw(Game1.fadeToBlackRect, Game1.graphics.GraphicsDevice.Viewport.Bounds, Color.Black * 0.75f);
-            SpriteText.drawStringWithScrollCenteredAt(b, Title, Game1.viewport.Width / 2,
-                Game1.viewport.Height / 2 - 128, Title);
-            textBox.Draw(b);
-            doneNamingButton.draw(b);
-            drawMouse(b);
+            var x = Game1.uiViewport.Width / 2 - 100;
+            var y = Game1.uiViewport.Height / 2 - 35;
+            var name = new TextField("",
+                ModEntry.GetTranslation("teleportPoint.naming.textField.name.description"), x, y, 200, 70)
+            {
+                Text = Dialogue.randomName()
+            };
+            AddComponent(name);
+            AddComponent(new Button(ModEntry.GetTranslation("teleportPoint.naming.button.done.title"),
+                ModEntry.GetTranslation("teleportPoint.naming.button.done.title"), x, y + 100, 200, 80)
+            {
+                OnLeftClicked = delegate()
+                {
+                    ModEntry.Config.TeleportData.Add(new TeleportData(name.Text, Game1.player.currentLocation.Name,
+                        Game1.player.Tile.X, Game1.player.Tile.Y));
+                    ModEntry.ConfigReload();
+                    Game1.exitActiveMenu();
+                }
+            });
+            AddComponent(new Button(ModEntry.GetTranslation("teleportPoint.naming.button.cancel.title"),
+                ModEntry.GetTranslation("teleportPoint.naming.button.cancel.title"), x, y + 200, 200, 80)
+            {
+                OnLeftClicked = new Action(Game1.exitActiveMenu)
+            });
         }
     }
 }
