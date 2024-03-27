@@ -21,12 +21,12 @@ namespace TeleportPoint.Framework.Gui
             }
         }
 
-        private void Teleport(string locationName, int tileX, int tileY)
+        private void Teleport(string locationName, float tileX, float tileY)
         {
             Game1.exitActiveMenu();
             Game1.player.swimming.Value = false;
             Game1.player.changeOutOfSwimSuit();
-            Game1.warpFarmer(locationName, tileX, tileY, false);
+            Game1.warpFarmer(locationName, (int)tileX, (int)tileY, false);
         }
 
         private string Get(string key)
@@ -41,11 +41,11 @@ namespace TeleportPoint.Framework.Gui
 
         public string LocationName { get; }
 
-        public int TileX { get; }
+        public float TileX { get; }
 
-        public int TileY { get; }
+        public float TileY { get; }
 
-        public TeleportData(string name, string locationName, int tileX, int tileY)
+        public TeleportData(string name, string locationName, float tileX, float tileY)
         {
             Name = name;
             LocationName = locationName;
